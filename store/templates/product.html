@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card mb-3" style="max-width: 600px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">
+                    {% if product.is_sale %}
+                        <span class="text-danger">Sale Price: ${{ product.sale_price }}</span><br>
+                        <span class="text-muted text-decoration-line-through">Original Price: ${{ product.price }}</span>
+                    {% else %}
+                        ${{ product.price }}
+                        <br/>ID: {{ product.id }}
+                    {% endif %}
+                </p>
+                <p class="card-text">
+                    <small class="text-body-secondary">Last updated {{ product.updated_at|date:"F d, Y" }}</small>
+                </p>
+                <!-- Add to Cart button -->
+                <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+                <button type="button" value="{{ product.id }}" class="btn btn-primary" id="add-cart">Add To Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+$(document).on('click', '#add-cart',function(e){
+     e.preventDefault();
+     
+     $.ajax({
+
+            type: 'POST',
+            url: '{% url "cart_add" %}',
+            data: {
+                product_id: $("#add-cart").val(),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                 action: "POST"
+           
+
+
+             },
+             success: function(json) {
+                console.log(json)  
+             },   
+             error: function(xhr, errmsg, err){
+
+             }
+             
+
+     });
+      
+
+
+})
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Header -->
+<header class="bg-dark py-3">
+    <div class="container px-4 px-lg-5my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">login</h1>
+            <p class="lead fw-normal text-white-50 mb-0">login to your account...</p>
+        </div>
+    </div>
+    
+</header>
+<br/><br/>
+<center>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 cool-8">
+            <form method="POST" action="{% url 'login' %}" class="my-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" placeholder="Enter Your Username" id="username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Enter Your Password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-secondary">Login</button>
+            </form>
+            
+            <style>
+                .my-form {
+                    max-width: 500px; /* تعيين أقصى عرض للنموذج */
+                    margin: auto; /* توسيط النموذج على الصفحة */
+                    padding: 20px; /* إضافة مسافات داخلية */
+                    background-color: #f8f9fa; /* خلفية فاتحة */
+                    border-radius: 8px; /* زوايا دائرية */
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+                }
+                .form-group {
+                    margin-bottom: 1.5rem; /* المسافة بين الحقول */
+                }
+                .btn-secondary {
+                    margin-top: 1rem; /* المسافة بين الزر والحقول */
+                }
+            </style>
+            
+            
+            
+
+            
+              <br/><br/>
+              <br/><br/>
+              
+            <p>
+            </p>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}
